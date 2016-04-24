@@ -104,22 +104,140 @@ public class Calculator extends Application {
 			calculate += "9";
 			textField.setText(all);
 		});
-		
-		Button bP = new Button("+");
-		Button bM = new Button("-");
-		Button bC = new Button("*");
-		Button bD = new Button("/");
-		Button bDel = new Button("del");
-		Button bCE = new Button("CE");
-		Button bCc = new Button("C");
-		Button bPM = new Button("±");
-		Button bE = new Button("=");
 
 		Button bDot = new Button(".");	
 		bDot.setOnAction(e -> {
 			all += ".";
 			calculate += ".";
 			textField.setText(all);
-		});	
+		});
+
+		Button bP = new Button("+");
+		bP.setOnAction(e -> {	
+			if (hasIndex == false) {
+				sum = Double.valueOf(calculate);
+				hasIndex = true;
+			}
+			else {
+				if (all.charAt(all.length() - 1) == index) {
+					all = all.substring(0, display.length() - 1);
+				}
+				else {
+				}	
+			}			
+			all += "+";
+			calculate += "+";
+			index = '+';
+			textField.setText(all);
+		});
+
+		Button bM = new Button("-");
+		bM.setOnAction(e -> {
+			if (hasIndex == false) {
+				sum = Double.valueOf(calculate);
+				hasIndex = true;
+			}
+			else {
+				if (all.charAt(all.length() - 1) == index) {
+					all = display.substring(0,display.length() - 1);
+				}
+				else {
+				}
+			}				
+			all += "-";
+			calculate += "-";
+			index = '-';
+			textField.setText(all);
+		});
+
+		Button bC = new Button("*");
+		bC.setOnAction(e -> {
+			if (hasIndex == false) {
+				sum = Double.valueOf(calculate);
+				hasindex = true;
+			}
+			else {
+				if(all.charAt(all.length() - 1) == index)
+					all = all.substring(0, all.length() - 1);
+				else{
+				}
+			}			
+			all += "x";
+			calculate += "x";
+			index = 'x';
+			textField.setText(all);
+		});
+
+		Button bD = new Button("/");
+		bD.setOnAction(e -> {	
+			if (hasIndex == false) {
+				sum = Double.valueOf(calculate);
+				hasIndex = true;
+			}
+			else {
+				if (all.charAt(all.length() - 1) == index)
+					all = all.substring(0,display.length() - 1);
+				else {
+				}
+			}			
+			all += "/";
+			calculate += "/";
+			index = '/';
+			textField.setText(all);
+		});
+
+		Button bDel = new Button("del");
+		bDel.setOnAction(e -> {
+			all = all.substring(0, display.length() - 1);
+			calculate = calculate.substring(0, compute.length() - 1);
+			textField.setText(all);
+		});
+
+		Button bCE = new Button("CE");
+		bCE.setOnAction(e -> {
+			if (hasIndex == true) {
+				all = all.substring(0, display.length() - display.lastIndexOf(index));
+				calculate = calculate.substring(0, compute.length() - compute.lastIndexOf(index));
+			}	
+			else {
+				all = "";
+				calculate = "";
+			}
+			textField.setText(all);
+		});
+
+		Button bc = new Button("C");
+		bCc.setOnAction(e -> {
+			all = "";
+			calculate = "";
+			sum = 0;
+			hold = "";
+			index = '0';
+			hasIndex = false;				
+			textField.setText(all);
+		});
+		
+		Button bPM = new Button("±");
+		bPM.setOnAction(e -> {		
+			if (index == '0') {
+				calculate();
+				sum *= (-1);
+				all = String.valueOf(sum);
+				calculate = all;
+				textField.setText(all);
+			}
+			hold = "";						
+		});
+
+		Button bE = new Button("=");
+		bE.setOnAction(e -> {				
+			setRemember();
+			calculate();			
+			all = String.valueOf(sum);
+			calculate = all;
+			index = '0';
+			hasIndex = false;				
+			textField.setText(all);
+		});
 	}
 }
