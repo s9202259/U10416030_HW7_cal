@@ -27,7 +27,8 @@ public class Calculator extends Application {
 		textField.setAlignment(Pos.CENTER_RIGHT);
 		textField.setEditable(false);
 		textField.setText("0");
-				
+		
+		//button fuction
 		Button b0 = new Button("0");
 		b0.setOnAction(e -> {
 			all += "0";
@@ -243,6 +244,7 @@ public class Calculator extends Application {
 			textField.setText(all);
 		});
 		
+		//button size
 		b0.setPrefSize(62, 30);
 		b1.setPrefSize(62, 30);
 		b2.setPrefSize(62, 30);
@@ -264,6 +266,7 @@ public class Calculator extends Application {
 		bPM.setPrefSize(62, 30);
 		bE.setPrefSize(62, 30);
 
+		//set for calculator's layout
 		StackPane paneTextField = new StackPane();
 		Pane pane = new VBox();
 		HBox first = new HBox();
@@ -278,24 +281,25 @@ public class Calculator extends Application {
 		fourth.getChildren().addAll(b1, b2, b3, bM);
 		fifth.getChildren().addAll(bDot, b0, bP, bE);
 		
-
 		paneTextField.getChildren().add(textField);
 		pane.getChildren().addAll(paneTextField, first, second,
 				third, fourth, fifth);			
 		
-		Scene scene = new Scene(pane, 250, 250);
+		Scene scene = new Scene(pane, 250, 150);
 		
 		primaryStage.setTitle("U10416030 計算機");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
 	
+	//keep the value
 	public void hold() {			
 		for(int i = 1 + calculate.lastIndexOf(index); i < calculate.length(); i++){
 			hold += calculate.charAt(i);	
 		}			
 	}
 	
+	//calculate button '+' '-' '*' '/'
 	public void calculate() {		
 		switch(index) {
 			case '+':				
@@ -317,6 +321,7 @@ public class Calculator extends Application {
 		hold = "";		
 	}
 	
+	//calculate answer of entered numbers
 	public void calculateSum(){
 		holdSum = number.get(0);
 		for(int i = 0; i < numberShow.size(); i++){
